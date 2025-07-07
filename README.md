@@ -31,7 +31,7 @@ gcc yourfile.obj -o yourprogram.exe -lkernel32
 4. **Run the program**
 
 ```bash
-./yourprogram.exe
+yourprogram.exe
 ```
 
 ---
