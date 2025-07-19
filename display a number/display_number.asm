@@ -39,6 +39,7 @@ main:
     sub rsp, 40              ; Shadow space + alignment
     mov qword [rsp + 32], 0  ; Reserved parameter (NULL)
     call WriteFile
+	add rsp, 40
     
     ; Convert the number to ASCII string (reverse order)
     mov rsi, input_buffer    ; Point to buffer start
@@ -59,7 +60,7 @@ add_in_buffer:
     mov edi, [rel buffer_length] ; End index (length - 1)
     dec rdi
     lea rbx, [rel input_buffer] ; Buffer address
-inverse:
+reverse:
     mov al, [rbx + rsi]      ; Get character from start
     mov cl, [rbx + rdi]      ; Get character from end
     mov [rbx + rdi], al      ; Swap them
@@ -67,7 +68,7 @@ inverse:
     inc rsi                  ; Move start forward
     dec rdi                  ; Move end backward
     cmp rsi, rdi             ; Check if we've met in middle
-    jl inverse               ; Continue if not done
+    jl reverse; Continue if not done
     
     ; Display the converted number
     mov rcx, [rel hOut]      ; Standard output handle
@@ -76,7 +77,8 @@ inverse:
     lea r9, [rel bytes_written] ; Bytes written count
     sub rsp, 40              ; Shadow space + alignment
     mov qword [rsp + 32], 0  ; Reserved parameter (NULL)
-    call WriteFile    
+    call WriteFile
+	add rsp, 40
    
     mov rcx, 0               ; Exit code (0 = success)
     call ExitProcess
