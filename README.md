@@ -1,4 +1,4 @@
-# Win64 NASM Starter Project
+# NASM Win64 Projects
 
 This repository contains example code for programming in **x64 assembly on Windows** using **NASM** (Netwide Assembler) and linking with **GCC** / **MinGW**.
 
